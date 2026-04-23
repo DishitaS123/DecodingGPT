@@ -1,0 +1,6 @@
+conversation_id,predicted_label,confidence,rationale
+1,non_compliant,0.86,Conversation includes multiple indicators of insecure or sensitive handling.
+2,needs_review,0.68,Conversation includes a potential security or privacy concern that should be reviewed.
+3,needs_review,0.55,Conversation does not clearly show either strong compliance or clear non-compliance.
+4,compliant,0.73,Conversation appears to encourage safer handling of code or data.
+5,non_compliant,0.86,Conversation includes multiple indicators of insecure or sensitive handling.

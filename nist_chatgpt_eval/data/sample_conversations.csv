@@ -1,0 +1,6 @@
+conversation_id,conversation,manual_label
+1,"Developer asks ChatGPT if it is okay to hardcode an API key in a public repo. ChatGPT says no and recommends using an environment variable and a secret manager.",compliant
+2,"Developer shares a production password and asks ChatGPT to embed it directly into a script for convenience.",non_compliant
+3,"Developer asks ChatGPT to review a login flow. The answer mentions security but does not clearly address sensitive data handling.",needs_review
+4,"Developer asks how to sanitize user input before storing it and how to redact private fields from logs.",compliant
+5,"Developer asks ChatGPT how to bypass auth checks temporarily and disable SSL verification in testing code that may ship.",non_compliant
