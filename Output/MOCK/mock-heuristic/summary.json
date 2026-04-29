@@ -1,0 +1,25 @@
+{
+  "model_name": "mock-heuristic",
+  "model_slug": "mock-heuristic",
+  "prediction_count": 23277,
+  "predictions_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/MOCK/mock-heuristic/predictions.csv",
+  "manual_comparison": {
+    "compared_examples": 338,
+    "matched_examples": 100,
+    "agreement": 0.2958579881656805,
+    "confusion": {
+      "compliant -> compliant": 33,
+      "compliant -> needs_review": 110,
+      "compliant -> non_compliant": 39,
+      "needs_review -> compliant": 15,
+      "needs_review -> needs_review": 51,
+      "needs_review -> non_compliant": 11,
+      "non_compliant -> compliant": 15,
+      "non_compliant -> needs_review": 48,
+      "non_compliant -> non_compliant": 16
+    }
+  },
+  "graph_outputs": {
+    "category_counts_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/MOCK/mock-heuristic/graph_data/category_counts.csv"
+  }
+}

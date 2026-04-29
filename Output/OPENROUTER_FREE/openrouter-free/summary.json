@@ -1,0 +1,52 @@
+{
+  "model_name": "openrouter/free",
+  "model_slug": "openrouter-free",
+  "prediction_count": 338,
+  "predictions_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/predictions.csv",
+  "input_subset_count": 339,
+  "manual_comparison": {
+    "compared_examples": 338,
+    "matched_examples": 125,
+    "agreement": 0.3698224852071006,
+    "confusion": {
+      "compliant -> compliant": 59,
+      "compliant -> needs_review": 92,
+      "compliant -> non_compliant": 31,
+      "needs_review -> compliant": 15,
+      "needs_review -> needs_review": 40,
+      "needs_review -> non_compliant": 22,
+      "non_compliant -> compliant": 20,
+      "non_compliant -> needs_review": 33,
+      "non_compliant -> non_compliant": 26
+    }
+  },
+  "graph_outputs": {
+    "category_counts_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/category_counts.csv",
+    "followed_category_1_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_1.csv",
+    "followed_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_2.csv",
+    "followed_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_3.csv",
+    "followed_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_4.csv",
+    "followed_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_5.csv",
+    "followed_category_6_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_6.csv",
+    "followed_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_7.csv",
+    "followed_category_8_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_8.csv",
+    "followed_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_9.csv",
+    "followed_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_10.csv",
+    "followed_category_10.2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_10.2.csv",
+    "followed_category_11_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_11.csv",
+    "followed_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/followed_subcategories_category_12.csv",
+    "violated_category_1_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_1.csv",
+    "violated_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_2.csv",
+    "violated_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_3.csv",
+    "violated_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_4.csv",
+    "violated_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_5.csv",
+    "violated_category_6_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_6.csv",
+    "violated_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_7.csv",
+    "violated_category_8_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_8.csv",
+    "violated_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_9.csv",
+    "violated_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_10.csv",
+    "violated_category_10.2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_10.2.csv",
+    "violated_category_11_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_11.csv",
+    "violated_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE/openrouter-free/graph_data/violated_subcategories_category_12.csv"
+  }
+}
