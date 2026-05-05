@@ -1,6 +1,6 @@
 # DecodingGPT
 
-This repository contains the final project for evaluating ChatGPT code/security advice against a NIST-inspired rubric, then comparing automated assessments to prior human annotations.
+This repository contains the final project for evaluating ChatGPT code/security advice against a NIST-inspired rubric, then comparing automated assessments to prior human annotations. The code in this repo builds off analysis done during a different project (link to that repo [text](https://github.com/DishitaS123/HumanFac)) 
 
 ## Where everything is
 
@@ -74,7 +74,7 @@ python3 nist_chatgpt_eval/main.py full-run \
 
 The original `conversationDataSet.csv` is about 728 MB, so it is not copied into this repo. The smaller 338-row prepared subset used in the writeup is included here so the evaluation can be rerun without the full raw dump.
 
-The complete original dataset can be found at this link[text](https://drive.google.com/drive/folders/1J4k2E4dTOXjolCV2Oq4m_-rJj_--TU24?usp=sharing).
+The complete original dataset can be found at this link [text](https://drive.google.com/drive/folders/1J4k2E4dTOXjolCV2Oq4m_-rJj_--TU24?usp=sharing).
 
 One manual annotation ID, `ankfvn5z`, does not appear in the raw conversation dump, so the prepared dataset contains 338 matched conversations rather than 339 annotation rows.
 
