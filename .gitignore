@@ -1,9 +1,5 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-
-# Local secrets
-nist_chatgpt_eval/api.key
-
 # OS/editor clutter
 .DS_Store
