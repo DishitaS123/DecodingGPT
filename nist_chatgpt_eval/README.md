@@ -61,4 +61,4 @@ The evaluator reports:
 ## Notes
 
 - The offline client is a heuristic baseline so the project remains runnable without API keys.
-- `PromptOnlyClient` is left in place as the integration point for GPT-4, Claude, or OpenRouter models.
+- `PromptOnlyClient` is left in place as the integration point for GPT-4, Gemini, or OpenRouter models. Openai-gpt-4-1-nano, deepseek-deepseek-v4-flash, and gemini-2.5-flash were used for the purposes of this study. 

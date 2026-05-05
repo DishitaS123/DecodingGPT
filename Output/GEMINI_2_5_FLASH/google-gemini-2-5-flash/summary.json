@@ -1,0 +1,50 @@
+{
+  "model_name": "google/gemini-2.5-flash",
+  "model_slug": "google-gemini-2-5-flash",
+  "prediction_count": 338,
+  "predictions_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/predictions.csv",
+  "input_subset_count": 339,
+  "manual_comparison": {
+    "compared_examples": 338,
+    "matched_examples": 134,
+    "agreement": 0.39644970414201186,
+    "confusion": {
+      "compliant -> compliant": 84,
+      "compliant -> needs_review": 70,
+      "compliant -> non_compliant": 28,
+      "needs_review -> compliant": 27,
+      "needs_review -> needs_review": 32,
+      "needs_review -> non_compliant": 18,
+      "non_compliant -> compliant": 26,
+      "non_compliant -> needs_review": 35,
+      "non_compliant -> non_compliant": 18
+    }
+  },
+  "graph_outputs": {
+    "category_counts_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/category_counts.csv",
+    "followed_category_1_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_1.csv",
+    "followed_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_2.csv",
+    "followed_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_3.csv",
+    "followed_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_4.csv",
+    "followed_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_5.csv",
+    "followed_category_6_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_6.csv",
+    "followed_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_7.csv",
+    "followed_category_8_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_8.csv",
+    "followed_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_9.csv",
+    "followed_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_10.csv",
+    "followed_category_11_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_11.csv",
+    "followed_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/followed_subcategories_category_12.csv",
+    "violated_category_1_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_1.csv",
+    "violated_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_2.csv",
+    "violated_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_3.csv",
+    "violated_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_4.csv",
+    "violated_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_5.csv",
+    "violated_category_6_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_6.csv",
+    "violated_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_7.csv",
+    "violated_category_8_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_8.csv",
+    "violated_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_9.csv",
+    "violated_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_10.csv",
+    "violated_category_11_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_11.csv",
+    "violated_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/graph_data/violated_subcategories_category_12.csv"
+  }
+}

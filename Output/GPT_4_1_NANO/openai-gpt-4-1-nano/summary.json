@@ -1,0 +1,41 @@
+{
+  "model_name": "openai/gpt-4.1-nano",
+  "model_slug": "openai-gpt-4-1-nano",
+  "prediction_count": 338,
+  "predictions_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/predictions.csv",
+  "input_subset_count": 339,
+  "manual_comparison": {
+    "compared_examples": 338,
+    "matched_examples": 115,
+    "agreement": 0.34023668639053256,
+    "confusion": {
+      "compliant -> compliant": 49,
+      "compliant -> needs_review": 2,
+      "compliant -> non_compliant": 131,
+      "needs_review -> compliant": 10,
+      "needs_review -> non_compliant": 67,
+      "non_compliant -> compliant": 11,
+      "non_compliant -> needs_review": 2,
+      "non_compliant -> non_compliant": 66
+    }
+  },
+  "graph_outputs": {
+    "category_counts_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/category_counts.csv",
+    "followed_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_2.csv",
+    "followed_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_3.csv",
+    "followed_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_4.csv",
+    "followed_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_5.csv",
+    "followed_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_7.csv",
+    "followed_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_9.csv",
+    "followed_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_10.csv",
+    "followed_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/followed_subcategories_category_12.csv",
+    "violated_category_2_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_2.csv",
+    "violated_category_3_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_3.csv",
+    "violated_category_4_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_4.csv",
+    "violated_category_5_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_5.csv",
+    "violated_category_7_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_7.csv",
+    "violated_category_9_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_9.csv",
+    "violated_category_10_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_10.csv",
+    "violated_category_12_csv": "/Users/dishita/Desktop/LLM/DecodingGPT/Output/GPT_4_1_NANO/openai-gpt-4-1-nano/graph_data/violated_subcategories_category_12.csv"
+  }
+}
