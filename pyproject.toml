@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "decodinggpt"
+version = "0.1.0"
+description = "Evaluation pipeline for comparing manual and LLM security assessments of ChatGPT conversations."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "matplotlib>=3.8,<4",
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "pytest>=8,<9",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["nist_chatgpt_eval"]

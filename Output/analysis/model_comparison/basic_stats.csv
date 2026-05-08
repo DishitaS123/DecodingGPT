@@ -1,0 +1,5 @@
+source,n_examples,mean_score,std_score,compliant_count,partially_compliant_count,non_compliant_count
+Manual,338,3.3166,1.0563,182,77,79
+DeepSeek-V4-Flash,338,2.5858,0.9941,27,238,73
+Gemini-2.5-Flash,338,3.3669,1.2646,137,137,64
+GPT-4.1-nano,338,2.2101,1.0743,70,4,264

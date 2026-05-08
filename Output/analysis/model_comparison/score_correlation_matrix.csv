@@ -1,0 +1,5 @@
+source,Manual,DeepSeek-V4-Flash,Gemini-2.5-Flash,GPT-4.1-nano
+Manual,1.0,0.206583,0.147835,0.181263
+DeepSeek-V4-Flash,0.206583,1.0,0.572755,0.28925
+Gemini-2.5-Flash,0.147835,0.572755,1.0,0.217677
+GPT-4.1-nano,0.181263,0.28925,0.217677,1.0

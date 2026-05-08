@@ -1,67 +1,77 @@
 # DecodingGPT
 
-This repository contains the final project for evaluating ChatGPT code/security advice against a NIST-inspired rubric, then comparing automated assessments to prior human annotations. The code in this repo builds off analysis done during a different project (link to that repo [text](https://github.com/DishitaS123/HumanFac)) 
+This repository evaluates ChatGPT security/code advice against a NIST-inspired rubric, then compares automated LLM judgments with prior manual annotations for the same 338 conversations.
 
-## Where everything is
+## Quick Start
+
+Clone the repo, move into it, and install everything with `uv`:
+
+```bash
+git clone https://github.com/DishitaS123/DecodingGPT.git
+cd DecodingGPT
+uv sync
+```
+
+After that, use `uv run` for every command so the synced environment is used automatically.
+
+## Repo Layout
 
 - Writeup source: [main.tex](/Users/dishita/Desktop/LLM/DecodingGPT/main.tex)
-- Evaluation code: [nist_chatgpt_eval](/Users/dishita/Desktop/LLM/DecodingGPT/nist_chatgpt_eval)
-- Manual annotations used for comparison: `data/manual_annotations.csv`
-- Prepared 338-conversation evaluation set: `data/annotated_conversations.csv`
-- Automated baseline predictions: `data/heuristic_predictions.csv`
-- Metrics summary: `data/evaluation_summary.json`
+- Evaluation package: [nist_chatgpt_eval](/Users/dishita/Desktop/LLM/DecodingGPT/nist_chatgpt_eval)
+- Plotting helpers: [Graphing_Results](/Users/dishita/Desktop/LLM/DecodingGPT/Graphing_Results)
+- Manual annotations: `data/manual_annotations.csv`
+- Prepared 338-conversation dataset: `data/annotated_conversations.csv`
+- Baseline heuristic outputs: `data/heuristic_predictions.csv`, `data/evaluation_summary.json`
+- Final model outputs used in the report: `Output/DEEPSEEK_V4_FLASH`, `Output/GEMINI_2_5_FLASH`, `Output/GPT_4_1_NANO`
+- Cross-model comparison outputs: `Output/analysis/model_comparison`
 
-## What the code does
+## Reproduce The Environment
 
-The pipeline supports three steps:
-
-1. Build the annotated evaluation set by joining the 338 manually labeled IDs with the original large conversation dump.
-2. Run an automated evaluator. The repository currently includes an offline heuristic baseline and a prompt stub for plugging in GPT-4, Claude, or OpenRouter models.
-3. Compare automated outputs against manual labels using accuracy, precision/recall/F1 for non-compliance, false positive rate, confidence/correctness correlation, and Cohen's kappa.
-
-## Conversation data visible to the model
-
-The included file `data/annotated_conversations.csv` shows the prepared 338-conversation subset that the evaluator sees for the public writeup and comparison workflow. It contains:
-
-- the raw conversation text used for evaluation
-- normalized text fields for the user and assistant turns
-- the corresponding manual annotations used for comparison
-
-This subset comes from a publicly released, anonymized Hugging Face conversation dataset plus our own manual labels. The raw 728 MB source dump is not checked into this repository, but the matched evaluation subset is included here to make the project easier to understand and reproduce.
-
-## Run it
-
-From the repo root:
+Install dependencies once:
 
 ```bash
-python3 -m pytest nist_chatgpt_eval/tests/test_pipeline.py
+uv sync
 ```
 
-To run a model and also render PNG plots after the predictions finish:
+Run tests:
 
 ```bash
-python3 /Users/dishita/Desktop/LLM/final_proj/nist_chatgpt_eval/main.py \
-  --input /Users/dishita/Desktop/LLM/final_proj/data/conversationDataSet.csv \
-  --output /Users/dishita/Desktop/LLM/DecodingGPT/Output/OPENROUTER_FREE \
-  --manual-labels "/Users/dishita/Desktop/LLM/final_proj/data/Best Practices Metrics - Final- Human Results.csv" \
-  --model "openrouter/free" \
-  --generate-plots
+uv run pytest nist_chatgpt_eval/tests/test_pipeline.py
 ```
 
-This keeps the existing CSV outputs and additionally writes PNGs to:
+## Main Pipeline
 
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/category_counts.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/followed_subcategories_category_2.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/followed_subcategories_category_3.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/followed_subcategories_category_10.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/violated_subcategories_category_2.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/violated_subcategories_category_3.png`
-- `Output/<MODEL_FOLDER>/<model-slug>/plots/violated_subcategories_category_10.png`
-
-To rerun the full baseline experiment:
+Prepare the annotated subset from the large conversation dump:
 
 ```bash
-python3 nist_chatgpt_eval/main.py full-run \
+uv run python -m nist_chatgpt_eval.main prepare \
+  --conversations /absolute/path/to/conversationDataSet.csv \
+  --annotations data/manual_annotations.csv \
+  --output data/annotated_conversations.csv
+```
+
+Run the offline baseline evaluator:
+
+```bash
+uv run python -m nist_chatgpt_eval.main analyze \
+  --input data/annotated_conversations.csv \
+  --output data/heuristic_predictions.csv \
+  --use-mock
+```
+
+Compute evaluation metrics for one prediction file against the manual labels:
+
+```bash
+uv run python -m nist_chatgpt_eval.main evaluate \
+  --predictions data/heuristic_predictions.csv \
+  --manual data/annotated_conversations.csv \
+  --output data/evaluation_summary.json
+```
+
+Run the full baseline pipeline in one command:
+
+```bash
+uv run python -m nist_chatgpt_eval.main full-run \
   --conversations /absolute/path/to/conversationDataSet.csv \
   --annotations data/manual_annotations.csv \
   --prepared-output data/annotated_conversations.csv \
@@ -70,14 +80,58 @@ python3 nist_chatgpt_eval/main.py full-run \
   --use-mock
 ```
 
-## Data note
+## Compare Manual Results Against The 3 LLMs
 
-The original `conversationDataSet.csv` is about 728 MB, so it is not copied into this repo. The smaller 338-row prepared subset used in the writeup is included here so the evaluation can be rerun without the full raw dump.
+All final model outputs are already in `Output`, so you can regenerate the comparison metrics, heatmap, and report examples directly from the saved CSVs:
 
-The complete original dataset can be found at this link [text](https://drive.google.com/drive/folders/1J4k2E4dTOXjolCV2Oq4m_-rJj_--TU24?usp=sharing).
+```bash
+uv run python -m nist_chatgpt_eval.main compare-models \
+  --manual data/annotated_conversations.csv \
+  --discover-root Output \
+  --output-dir Output/analysis/model_comparison
+```
 
-One manual annotation ID, `ankfvn5z`, does not appear in the raw conversation dump, so the prepared dataset contains 338 matched conversations rather than 339 annotation rows.
+This command writes:
 
-## Writeup note
+- `Output/analysis/model_comparison/pairwise_metrics.csv`
+- `Output/analysis/model_comparison/manual_vs_models_summary.csv`
+- `Output/analysis/model_comparison/basic_stats.csv`
+- `Output/analysis/model_comparison/score_correlation_matrix.csv`
+- `Output/analysis/model_comparison/score_correlation_heatmap.png`
+- `Output/analysis/model_comparison/agreement_examples.md`
 
-The report source is in `main.tex`. A compiled PDF should also be checked into the repo root for submission convenience when available.
+## Regenerate Plots From The Generated CSVs
+
+The graphing scripts use each model's saved `predictions.csv` and regenerate plots directly from those CSVs. All three graphing scripts now use only the top 3 categories by default instead of hard-coded category IDs.
+
+From the repo root:
+
+```bash
+uv run python Graphing_Results/graphing_categories.py Output/DEEPSEEK_V4_FLASH/deepseek-deepseek-v4-flash/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_followed.py Output/DEEPSEEK_V4_FLASH/deepseek-deepseek-v4-flash/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_violated.py Output/DEEPSEEK_V4_FLASH/deepseek-deepseek-v4-flash/predictions.csv
+uv run python Graphing_Results/graphing_categories.py Output/GPT_4_1_NANO/openai-gpt-4-1-nano/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_followed.py Output/GPT_4_1_NANO/openai-gpt-4-1-nano/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_violated.py Output/GPT_4_1_NANO/openai-gpt-4-1-nano/predictions.csv
+uv run python Graphing_Results/graphing_categories.py Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_followed.py Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/predictions.csv
+uv run python Graphing_Results/graphing_sub_score_violated.py Output/GEMINI_2_5_FLASH/google-gemini-2-5-flash/predictions.csv
+```
+
+These commands save the PNGs into each model's `graph_data` folder.
+
+## Data Notes
+
+- The raw source conversation dump is not checked into this repository because it is large.
+- The prepared 338-row subset used for evaluation is included in `data/annotated_conversations.csv`.
+- One manual annotation ID, `ankfvn5z`, does not appear in the raw conversation dump, so 339 annotation rows become 338 matched conversations.
+
+The original larger dataset can be accessed here: https://drive.google.com/drive/folders/1J4k2E4dTOXjolCV2Oq4m_-rJj_--TU24?usp=sharing
+
+## Report Notes
+
+The current report source is in `main.tex`. The generated comparison artifacts most useful for the writeup are:
+
+- `Output/analysis/model_comparison/manual_vs_models_summary.csv`
+- `Output/analysis/model_comparison/score_correlation_heatmap.png`
+- `Output/analysis/model_comparison/agreement_examples.md`

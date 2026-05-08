@@ -40,7 +40,7 @@
  
 \begin{abstract}
  
-Large Language Models (LLMs) have become increasingly prevalent in software development, with tools like ChatGPT and GitHub Copilot serving as common code assistants. However, the security implications of LLM-generated code remain underexplored. In this project, we present an automated approach to assess whether code suggestions from ChatGPT align with the National Institute of Standards and Technology (NIST) Cybersecurity Framework guidelines. We compare the results of automated assessment using multiple modern LLMs (including Claude, GPT-4, and open-source alternatives via OpenRouter) against manual annotations from previous work, analyzing 338 developer conversations from a public Hugging Face dataset. Our findings aim to evaluate the accuracy and efficiency of AI-driven code security assessment compared to human expert review, while also examining the trade-off between assessment quality and computational cost across different LLM providers.
+Large Language Models (LLMs) have become increasingly prevalent in software development, with tools like ChatGPT and GitHub Copilot serving as common code assistants. However, the security implications of LLM-generated code remain underexplored. In this project, we present an automated approach to assess whether code suggestions from ChatGPT align with the National Institute of Standards and Technology (NIST) Cybersecurity Framework guidelines. We compare the results of automated assessment using three modern LLM judges---DeepSeek-V4-Flash, Gemini-2.5-Flash, and GPT-4.1-nano---against manual annotations from previous work, analyzing 338 developer conversations from a public Hugging Face dataset. Across the three automated judges, agreement with the manual labels remained modest: Gemini-2.5-Flash achieved the highest agreement rate at 39.6\%, followed by GPT-4.1-nano at 34.0\% and DeepSeek-V4-Flash at 29.0\%. The results suggest that while automated assessment can surface broad security trends, it does not yet reliably substitute for human review on nuanced cases.
  
 \end{abstract}
  
@@ -129,26 +129,12 @@ Permission to use the previous project's manual annotations has been obtained fr
  
 \subsubsection{Phase 1: Automated Assessment with Multiple LLMs}
  
-We will assess the same 338 conversations using three categories of LLMs:
+We assessed the same 338 conversations using three LLM judges:
 
 \begin{enumerate}
-    \item \textbf{Proprietary, Expensive Models}:
-    \begin{itemize}
-        \item Claude (via Anthropic API)
-        \item GPT-4 (via OpenAI API)
-    \end{itemize}
-    
-    \item \textbf{Open-Source Models (via OpenRouter)}:
-    \begin{itemize}
-        \item Mistral 7B
-        \item Llama 2 (7B and 13B variants)
-        \item Other open-weight models as feasible
-    \end{itemize}
-    
-    \item \textbf{Baseline Comparisons}:
-    \begin{itemize}
-        \item GPT-3.5 (the original model used in conversations)
-    \end{itemize}
+    \item \textbf{DeepSeek-V4-Flash}
+    \item \textbf{Gemini-2.5-Flash}
+    \item \textbf{GPT-4.1-nano}
 \end{enumerate}
  
 For each conversation, we prompt the evaluating LLM with:
@@ -177,51 +163,57 @@ We will compare automated assessments against the manual annotations from the pr
     \item \textbf{Agreement Rate}: Percentage of conversations where the automated assessment reaches the same compliance conclusion as manual review.
     \item \textbf{Precision and Recall}: Among conversations identified as non-compliant by manual review, what fraction are correctly identified by each automated method?
     \item \textbf{False Positive Rate}: How often do automated methods flag compliant code as non-compliant?
-    \item \textbf{Confidence Distribution}: Do more confident LLM assessments correlate with higher accuracy? Use a Pearson Correlation Test
+    \item \textbf{Cohen's Kappa}: How much agreement remains after adjusting for chance?
+    \item \textbf{Score Correlation}: Do the automated judges preserve the same overall score ordering as the manual annotations? We evaluate this with Pearson correlations over the five-point score scale and visualize the pairwise relationships in a heat map.
 \end{itemize}
  
  
 \subsection{Reproducibility and Code}
  
-All code for prompting, data processing, and evaluation will be maintained in a public GitHub repository. 
+All code for prompting, data processing, and evaluation is maintained in a public GitHub repository. The repository now includes a `pyproject.toml`, so the environment can be reproduced by cloning the repo and running `uv sync`, followed by `uv run` for tests, evaluation, analysis, and plotting commands. The project repository is available at \url{https://github.com/DishitaS123/DecodingGPT/tree/main}, and the earlier repository that produced the manual annotation workflow is available at \url{https://github.com/DishitaS123/HumanFac}.
 
-Here is access to our old repository that performed the manual work: https://github.com/DishitaS123/HumanFac
+The larger source conversation dataset is not checked into the repository because of file size, but the link used for this project is included for context and reproducibility: \url{https://drive.google.com/drive/folders/1J4k2E4dTOXjolCV2Oq4m_-rJj_--TU24?usp=sharing}. The prepared subset and manual annotations used in the analysis are included in the repository.
+ 
+\section{Results and Findings}
 
-New Repository: https://github.com/DishitaS123/DecodingGPT/tree/main
+Table \ref{tab:manual-model-metrics} summarizes the main agreement metrics between the manual annotations and each automated judge. Gemini-2.5-Flash achieved the highest agreement rate with the manual labels at 39.6\%, followed by GPT-4.1-nano at 34.0\% and DeepSeek-V4-Flash at 29.0\%. All three models produced low Cohen's kappa values, indicating that much of the overlap was weak once chance agreement was taken into account.
 
-Do not quite have results yet, i was super swamped this week, but I will get started on results tomorrow.  
+\begin{table}[H]
+\centering
+\caption{Manual vs. automated model comparison on 338 shared conversations.}
+\label{tab:manual-model-metrics}
+\begin{tabular}{lccccc}
+\toprule
+Model & Agreement & Cohen's $\kappa$ & Pearson $r$ & Spearman $\rho$ & Shared $n$ \\
+\midrule
+DeepSeek-V4-Flash & 0.290 & 0.048 & 0.207 & 0.210 & 338 \\
+Gemini-2.5-Flash & 0.396 & 0.064 & 0.148 & 0.154 & 338 \\
+GPT-4.1-nano & 0.340 & 0.062 & 0.181 & 0.175 & 338 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-The anonymized dataset and manual annotations will be shared (subject to any applicable licensing restrictions).
- 
-\section{Preliminary Results and Findings}
- 
-\textit{[This section will be populated as experiments progress. The following is a placeholder describing what this section will contain.]}
- 
-At this stage, we are in the early phases of automated assessment. We have:
- 
-\begin{enumerate}
-    \item Finalized the assessment prompt and rubric
-    \item Set up API access to Claude and OpenRouter for cost-effective testing
-    \item Begun running assessments on a subset of 50 conversations to validate the approach
-\end{enumerate}
- 
-Preliminary observations:
-\begin{itemize}
-    \item Initial assessments suggest good agreement between Claude and manual annotations on clear-cut compliance cases
-    \item The open-source models show some variability in their compliance assessments, which we are investigating
-    \item Cost differences are substantial (Claude costs approximately 10x the cost of Llama 2 via OpenRouter)
-\end{itemize}
- 
-We expect to complete the full assessment of all 338 conversations by end of next week, with final results presented in the conclusion.
+The basic score distributions also reveal different model tendencies. The manual annotations had a mean score of 3.32 on the five-point scale. Gemini-2.5-Flash was the closest in average severity at 3.37, while DeepSeek-V4-Flash skewed lower at 2.59 and GPT-4.1-nano was the harshest at 2.21. GPT-4.1-nano labeled 264 of 338 conversations as non-compliant, while DeepSeek-V4-Flash labeled 238 of 338 as partially compliant. This suggests that the weaker agreement was not only about isolated mistakes, but also about systematic calibration differences between judges.
+
+Figure \ref{fig:correlation-heatmap} shows the pairwise Pearson correlations across the four scorers. The strongest model-to-model relationship appeared between DeepSeek-V4-Flash and Gemini-2.5-Flash ($r = 0.573$), which was substantially higher than any model-to-manual correlation. This indicates that the automated judges sometimes resembled each other more than they resembled the human annotations.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Output/analysis/model_comparison/score_correlation_heatmap.png}
+\caption{Pearson correlation heat map over the five-point overall score scale for the manual annotations and the three automated judges.}
+\label{fig:correlation-heatmap}
+\end{figure}
+
+The qualitative examples help explain where the models succeeded and failed. In conversation `59D737L`, all three LLM judges matched the manual non-compliant label when the assistant recommended a hard-coded password in Go server code. This was a clear-cut case of insecure credential handling, and the agreement suggests that obvious security violations are relatively easy to detect automatically. By contrast, conversation `3Qee1K9` produced a strong disagreement pattern: the manual annotation labeled the conversation non-compliant, DeepSeek-V4-Flash marked it as partially compliant, Gemini-2.5-Flash marked it compliant, and GPT-4.1-nano marked it non-compliant. The conversation mixed refusal language with later password-storage guidance, which appears to have triggered different interpretations of whether the overall exchange was ultimately safe or unsafe.
+
+Another disagreement case, `4DxpUcy`, shows that the models also diverged on more technical smart-contract analysis. The manual annotation and Gemini-2.5-Flash labeled the conversation compliant, DeepSeek-V4-Flash labeled it partially compliant, and GPT-4.1-nano labeled it non-compliant. Here the disagreement appears to stem less from the presence of an explicit vulnerability and more from how much context each judge required before concluding that the assistant's explanation and mitigation advice were adequate.
  
  
 \section{Conclusion}
- 
-\textit{[This section will be completed when results are finalized. The following is a placeholder.]}
- 
-% This project addresses a gap in the literature by providing the first systematic comparison of automated versus manual assessment of LLM-generated code security. By evaluating multiple modern LLMs across 338 developer conversations, we aim to establish whether AI-driven security assessment can reliably replicate expert human judgment while dramatically reducing cost and time.
- 
-% The implications of this work extend beyond academic interest: as LLMs become more prevalent in professional software development, organizations need scalable methods for auditing the security of suggestions provided to developers. This project contributes a methodology and empirical evidence toward that goal.
+
+This project tested whether modern LLMs can reproduce manual security assessments of developer-ChatGPT conversations at scale. The answer, based on these 338 conversations, is only partially. All three automated judges identified some obvious security failures, but none produced strong agreement with the manual annotations, and each displayed a distinct scoring bias. Gemini-2.5-Flash aligned best overall, GPT-4.1-nano tended to over-predict non-compliance, and DeepSeek-V4-Flash frequently collapsed nuanced cases into the middle ``needs review'' category.
+
+These results suggest that automated LLM-based assessment is useful as a screening or triage tool, but not yet as a drop-in replacement for human review when the goal is precise judgment against a structured security rubric. A practical next step would be to combine prompt-based judging with stronger calibration procedures, richer rubric-specific exemplars, and targeted human review for borderline cases.
  
 \begin{thebibliography}{99}
  

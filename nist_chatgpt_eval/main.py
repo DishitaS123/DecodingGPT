@@ -10,6 +10,10 @@ if __package__ in {None, ""}:
 
 from nist_chatgpt_eval.client import HeuristicSecurityClient, PromptOnlyClient
 from nist_chatgpt_eval.dataio import build_annotated_dataset
+from nist_chatgpt_eval.model_comparison import (
+    discover_prediction_csvs,
+    generate_model_comparison_report,
+)
 from nist_chatgpt_eval.pipeline import compare_with_manual, run_batch, write_summary
 
 
@@ -33,6 +37,26 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--predictions", required=True, type=Path, help="Prediction CSV.")
     evaluate.add_argument("--manual", required=True, type=Path, help="Prepared dataset CSV.")
     evaluate.add_argument("--output", type=Path, default=None, help="Optional JSON summary output.")
+
+    compare_models = subparsers.add_parser(
+        "compare-models",
+        help="Generate pairwise metrics, a correlation heatmap, and report-ready examples.",
+    )
+    compare_models.add_argument("--manual", required=True, type=Path, help="Prepared dataset CSV.")
+    compare_models.add_argument(
+        "--prediction",
+        action="append",
+        dest="predictions",
+        type=Path,
+        help="Prediction CSV to include. Repeat once per model.",
+    )
+    compare_models.add_argument(
+        "--discover-root",
+        type=Path,
+        default=None,
+        help="Optional Output root to auto-discover prediction CSVs when --prediction is omitted.",
+    )
+    compare_models.add_argument("--output-dir", required=True, type=Path, help="Directory for comparison outputs.")
 
     full_run = subparsers.add_parser("full-run", help="Prepare data, score it, and compute metrics.")
     full_run.add_argument("--conversations", required=True, type=Path, help="Raw conversation dump CSV.")
@@ -62,6 +86,16 @@ def main() -> None:
         summary = compare_with_manual(args.predictions, args.manual)
         if args.output:
             write_summary(args.output, summary)
+        print(json.dumps(summary, indent=2))
+        return
+
+    if args.command == "compare-models":
+        prediction_paths = list(args.predictions or [])
+        if not prediction_paths:
+            if args.discover_root is None:
+                raise ValueError("Pass at least one --prediction or provide --discover-root.")
+            prediction_paths = discover_prediction_csvs(args.discover_root)
+        summary = generate_model_comparison_report(args.manual, prediction_paths, args.output_dir)
         print(json.dumps(summary, indent=2))
         return
 
