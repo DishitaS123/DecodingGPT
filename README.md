@@ -16,7 +16,7 @@ After that, use `uv run` for every command so the synced environment is used aut
 
 ## Repo Layout
 
-- Writeup source: [main.tex](/Users/dishita/Desktop/LLM/DecodingGPT/main.tex)
+- Final report PDF: [LLM_Final_Report.pdf](/Users/dishita/Desktop/LLM/DecodingGPT/LLM_Final_Report.pdf)
 - Evaluation package: [nist_chatgpt_eval](/Users/dishita/Desktop/LLM/DecodingGPT/nist_chatgpt_eval)
 - Plotting helpers: [Graphing_Results](/Users/dishita/Desktop/LLM/DecodingGPT/Graphing_Results)
 - Manual annotations: `data/manual_annotations.csv`
@@ -130,7 +130,7 @@ The original larger dataset can be accessed here: https://drive.google.com/drive
 
 ## Report Notes
 
-The current report source is in `main.tex`. The generated comparison artifacts most useful for the writeup are:
+The final writeup for this project is [LLM_Final_Report.pdf](/Users/dishita/Desktop/LLM/DecodingGPT/LLM_Final_Report.pdf). The generated comparison artifacts most useful for the report are:
 
 - `Output/analysis/model_comparison/manual_vs_models_summary.csv`
 - `Output/analysis/model_comparison/score_correlation_heatmap.png`
